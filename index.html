@@ -1,0 +1,2541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin's Cake - Kue Premium dengan Rasa Autentik</title>
+    <link rel="icon" type="image/png" href="logo/Logo.png">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #D4A373;
+            --primary-light:rgb(110, 58, 3);
+            --primary-dark: #B38B5B;
+            --secondary:rgb(29, 16, 2);
+            --accent: #CCD5AE;
+            --dark: #5C4D3D;
+            --light: #FEFAE0;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--light);
+            color: var(--dark);
+        }
+        
+        .navbar {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar.scrolled {
+            background-color: rgb(29, 16, 2)  ;
+            box-shadow: 0 4px 15px rgba(254, 131, 0, 0.08);
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary-light) 100%);
+            min-height: 100vh;
+        }
+        
+        .cake-card {
+            transition: all 0.3s ease;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(48, 22, 2, 0.08);
+            background-color: white;
+        }
+        
+        .cake-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(92, 77, 61, 0.12);
+        }
+        
+        .section {
+            padding: 90px 0;
+        }
+        
+        .floating {
+            animation: floating 3.5s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .map-container {
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(92, 77, 61, 0.08);
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(92, 77, 61, 0.05);
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .text-primary {
+            color: var(--primary);
+        }
+        
+        .bg-primary {
+            background-color: var(--primary);
+        }
+        
+        .border-primary {
+            border-color: var(--primary);
+        }
+
+        .animate-bounce {
+    animation: bounce 0.5s;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+#cart-modal {
+    transition: opacity 0.3s ease;
+}
+
+#cart-items {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+.quantity-btn {
+    transition: background-color 0.2s;
+}
+
+.quantity-btn:hover {
+    background-color: #e2e8f0;
+}
+/* Add these custom animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+.shake-animation {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Category Filter Styles */
+.category-filter {
+        background-color: var(--secondary);
+        color: var(--dark);
+        transition: all 0.3s ease;
+    }
+    
+    .category-filter[data-category="all"].active,
+    .category-filter[data-category="hias"].active,
+    .category-filter[data-category="basah"].active {
+        background-color: var(--primary);
+        color: white;
+    }
+    
+    /* Smooth transition for cake cards */
+    .cake-card {
+        transition: all 0.3s ease;
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    .cake-card.hidden {
+        opacity: 0;
+        height: 0;
+        padding: 0;
+        margin: 0;
+        overflow: hidden;
+        transform: translateY(20px);
+    }
+
+    /* Animation for the spinner */
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Modal transitions */
+#confirmation-modal div > div,
+#checkout-modal div > div {
+    transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    /* Make cart icon slightly larger on mobile */
+    #cart-button i {
+        font-size: 1.25rem;
+    }
+    /* Adjust position of counter badge */
+    #cart-counter {
+        top: -0.25rem;
+        right: -0.25rem;
+    }
+    /* Make order button smaller on mobile */
+    .btn-primary {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+    }
+}
+ /* Animation for the underline effect */
+ .group:hover .group-hover\:w-full {
+        width: 100%;
+    }
+    
+    /* Smooth transitions for mobile menu */
+    #mobile-menu {
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    /* Ensure proper stacking context */
+    .navbar {
+        z-index: 50;
+    }
+    
+    #mobile-menu {
+        z-index: 60;
+    }
+    
+    #mobile-menu-overlay {
+        z-index: 55;
+    }
+     #fullImageModal {
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    #fullImageModal:not(.hidden) {
+        opacity: 1;
+    }
+
+    /* Desktop specific styles */
+    @media (min-width: 768px) {
+        #fullImageModal img {
+            max-width: 70vw;
+            max-height: 70vh;
+        }
+    }
+
+    /* Mobile specific styles */
+    @media (max-width: 767px) {
+        #fullImageModal img {
+            max-width: 90vw;
+            max-height: 90vh;
+        }
+    }
+        
+    </style>
+</head>
+<body>
+    
+   
+<div id="cart-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-lg w-full max-w-md max-h-[80vh] overflow-y-auto">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-xl font-bold text-dark">Keranjang Belanja</h3>
+                <button id="close-cart" class="text-gray-500 hover:text-dark">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="cart-items" class="space-y-4">
+                <!-- Cart items will be added here dynamically -->
+                <div class="text-center py-8 text-gray-500">
+                    Keranjang belanja kosong
+                </div>
+            </div>
+            
+            <div class="border-t mt-6 pt-4">
+                <div class="flex justify-between mb-4">
+                    <span class="font-medium">Total:</span>
+                    <span id="cart-total" class="font-bold text-primary">Rp 0</span>
+                </div>
+                <button id="clear-cart" class="text-red-500 hover:text-red-700 font-medium py-2 px-4 rounded-lg transition">
+                    <i class="fas fa-trash-alt mr-2"></i>Hapus Semua
+                </button>       
+                <button id="checkout-btn" class="btn-primary w-full py-3 rounded-lg font-medium shadow-md mt-2">
+                    Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Confirmation Modal for Clear Cart -->
+<div id="confirmation-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-60 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl overflow-hidden shadow-2xl transform transition-all duration-300 scale-95 opacity-0 max-w-sm w-full">
+        <div class="p-6 text-center">
+            <div class="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 mb-4">
+                <i class="fas fa-exclamation text-red-600 text-xl"></i>
+            </div>
+            <h3 class="text-lg font-medium text-gray-900 mb-2">Konfirmasi Penghapusan</h3>
+            <p class="text-gray-500 mb-6">Apakah Anda yakin ingin menghapus semua pesanan?</p>
+            <div class="flex justify-center space-x-4">
+                <button id="confirm-cancel" class="px-5 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition duration-200">
+                    Batal
+                </button>
+                <button id="confirm-delete" class="px-5 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition duration-200 transform hover:scale-105">
+                    Hapus Semua
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+ <!-- Checkout Success Modal -->
+ <div id="checkout-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-70 flex items-center justify-center p-4">
+    <div class="bg-white rounded-xl overflow-hidden w-full max-w-md transform transition-all duration-300 scale-95 opacity-0">
+        <div class="p-6 text-center">
+            <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
+                <i class="fas fa-check text-green-600 text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Pemesanan Berhasil!</h3>
+            <p class="text-gray-600 mb-6">Kami akan mengarahkan Anda ke WhatsApp untuk konfirmasi pesanan.</p>
+            
+            <div id="order-summary" class="text-left mb-6 p-4 bg-gray-50 rounded-lg max-h-48 overflow-y-auto">
+                <!-- Order items will be inserted here -->
+            </div>
+            
+            <div class="flex justify-center space-x-4">
+                <button id="cancel-order" class="px-5 py-2 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition">
+                    Batal
+                </button>
+                <button id="confirm-whatsapp" class="px-5 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition flex items-center justify-center min-w-24">
+                    <span>Oke</span>
+                    <i id="whatsapp-loading" class="fas fa-spinner fa-spin ml-2 hidden"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+
+   <!-- Navigation Bar -->
+<nav class="navbar fixed w-full z-50 py-3 px-6 lg:px-16">
+    <div class="flex justify-between items-center">
+        <a href="#home" class="flex items-center">
+        <img src="logo/Logo.png"  alt="Tin's Cake" 
+                 class="w-9 h-9 rounded-full border-2 border-white cursor-pointer"
+                 onclick="openFullImage(this)">
+            <span class="ml-3 text-xl font-semibold text-white">Tin's Cake</span>
+        </a>
+        
+        <div class="hidden md:flex space-x-8">
+            <a href="#home" class="text-white font-medium relative pb-1 group">
+                Home
+                <span class="absolute bottom-0 left-0 h-0.5 bg-white w-0 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#about" class="text-white font-medium relative pb-1 group">
+                About Us
+                <span class="absolute bottom-0 left-0 h-0.5 bg-white w-0 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#products" class="text-white font-medium relative pb-1 group">
+                Produk
+                <span class="absolute bottom-0 left-0 h-0.5 bg-white w-0 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+            <a href="#location" class="text-white font-medium relative pb-1 group">
+                Lokasi
+                <span class="absolute bottom-0 left-0 h-0.5 bg-white w-0 transition-all duration-300 group-hover:w-full"></span>
+            </a>
+        </div>
+        
+        
+        <div class="flex items-center space-x-4">
+        <!-- Cart icon with counter -->
+        <div class="relative">
+            <button id="cart-button" class="text-white hover:text-gray-200 transition">
+                <i class="fas fa-shopping-cart text-xl"></i>
+                <span id="cart-counter" class="absolute -top-2 -right-2 bg-primary text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center hidden">0</span>
+            </button>
+        </div>
+            
+            <a href="#products" class="hidden md:block btn-primary px-5 py-2 rounded-full font-medium shadow-md">
+                Pesan Sekarang
+            </a>
+             <!-- Mobile Menu Button -->
+             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Sidebar Menu -->
+<div id="mobile-menu" class="fixed inset-y-0 right-0 w-64 bg-white shadow-lg transform translate-x-full transition-transform duration-300 ease-in-out z-50">
+    <div class="px-6 py-4 flex justify-end">
+        <button id="close-mobile-menu" class="text-gray-500 focus:outline-none">
+            <i class="fas fa-times text-xl"></i>
+        </button>
+    </div>
+    <div class="px-6 space-y-6">
+        <a href="#home" class="block text-gray-900 font-medium relative pb-1 group">
+            Home
+            <span class="absolute bottom-0 left-0 h-0.5 bg-[#4B2E2E] w-0 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#about" class="block text-gray-900 font-medium relative pb-1 group">
+            About Us
+            <span class="absolute bottom-0 left-0 h-0.5 bg-[#4B2E2E] w-0 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#products" class="block text-gray-900 font-medium relative pb-1 group">
+            Produk
+            <span class="absolute bottom-0 left-0 h-0.5 bg-[#4B2E2E] w-0 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+        <a href="#location" class="block text-gray-900 font-medium relative pb-1 group">
+            Lokasi
+            <span class="absolute bottom-0 left-0 h-0.5 bg-[#4B2E2E] w-0 transition-all duration-300 group-hover:w-full"></span>
+        </a>
+    </div>
+</div>
+
+<!-- Overlay when mobile menu is open -->
+<div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+            
+        </div>
+        
+    </div>
+</nav>
+
+
+
+    <!-- Hero Section -->
+<section id="home" class="hero flex items-center justify-center pt-16 md:pt-20 min-h-screen">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center"><br>
+        <!-- Text Content -->
+        <div class="lg:w-1/2 mb-10 lg:mb-0 text-center lg:text-left px-4 sm:px-0">
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight animate-fadeInUp">
+                Kue Autentik dengan <span class="text-yellow-300">Cita Rasa</span> Premium
+            </h1>
+            <p class="mt-4 sm:mt-6 text-base sm:text-lg text-white opacity-90 max-w-md mx-auto lg:mx-0 animate-fadeInUp delay-100">
+                Tin's Cake menghadirkan kue tradisional dan modern dengan bahan pilihan dan sentuhan tangan ahli. Setiap gigitan adalah kenikmatan yang tak terlupakan.
+            </p>
+            <div class="mt-6 sm:mt-8 flex flex-col sm:flex-row justify-center lg:justify-start gap-3 sm:gap-4 animate-fadeInUp delay-200">
+                <a href="#products" class="btn-primary px-6 py-3 sm:px-7 sm:py-3 rounded-full font-medium shadow-lg hover:scale-105 transition-transform">
+                    Jelajahi Menu
+                </a>
+                <a href="#location" class="border-2 border-yellow-300 text-yellow-300 hover:bg-yellow-50 hover:bg-opacity-10 px-6 py-3 sm:px-7 sm:py-3 rounded-full font-medium transition flex items-center justify-center">
+                    <i class="fas fa-phone-alt mr-2"></i> Hubungi Kami
+                </a>
+            </div>
+        </div>
+        
+        <!-- Image Content -->
+        <div class="lg:w-1/2 relative mt-10 lg:mt-0 px-4 sm:px-0">
+            <div class="floating animate-float">
+                <img src="produk/ulang_tahun.jpg" 
+                     alt="Birthday Cake" 
+                     class="rounded-2xl sm:rounded-3xl shadow-xl sm:shadow-2xl w-full max-w-md mx-auto border-4 border-white transform hover:scale-105 transition-transform">
+            </div>
+            
+            <!-- Badge 1 - Responsive Positioning -->
+            <div class="absolute bottom-0 sm:-bottom-6 left-0 sm:-left-6 bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg animate-fadeInRight delay-300">
+                <div class="flex items-center">
+                    <div class="bg-pink-100 p-2 sm:p-3 rounded-full">
+                        <i class="fas fa-award text-pink-600 text-lg sm:text-xl"></i>
+                    </div>
+                    <div class="ml-2 sm:ml-3">
+                        <p class="font-bold text-dark text-sm sm:text-base">Kue Terbaik 2020</p>
+                        <p class="text-xs sm:text-sm text-dark opacity-70">Paling diminati</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Badge 2 - Responsive Positioning -->
+            <div class="absolute top-0 sm:-top-10 right-0 sm:-right-10 bg-white p-3 sm:p-4 rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg animate-fadeInLeft delay-400">
+                <div class="flex items-center">
+                    <div class="bg-green-100 p-2 sm:p-3 rounded-full">
+                        <i class="fas fa-leaf text-green-600 text-lg sm:text-xl"></i>
+                    </div>
+                    <div class="ml-2 sm:ml-3">
+                        <p class="font-bold text-dark text-sm sm:text-base">Bahan Organik</p>
+                        <p class="text-xs sm:text-sm text-dark opacity-70">100% Alami</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- About Us Section -->
+    <section id="about" class="section bg-white">
+        <div class="container mx-auto px-6 lg:px-16">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark">Tentang <span class="text-primary">Tin's Cake</span></h2>
+                <p class="mt-4 text-dark opacity-90 max-w-2xl mx-auto">
+                    Setiap kue kami dibuat dengan dedikasi tinggi dan resep spesial yang telah disempurnakan.
+                </p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-center">
+                <div class="lg:w-1/2 mb-12 lg:mb-0 lg:pr-12">
+                    <img src="https://images.unsplash.com/photo-1603532648955-039310d9ed75?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" 
+                         alt="About Us" 
+                         class="rounded-3xl shadow-xl w-full border-4 border-white">
+                </div>
+                <div class="lg:w-1/2">
+                    <h3 class="text-2xl font-bold text-dark mb-6">Filosofi Kami</h3>
+                    <p class="text-dark opacity-90 mb-6">
+                        Berdiri sejak 2018, Tin's Cake lahir dari kecintaan terhadap kue tradisional dengan sentuhan modern. Kami percaya kue yang baik tidak hanya enak tetapi juga membawa kenangan dan kebahagiaan.
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                        <div class="bg-pink-100 p-6 rounded-2xl">
+                            <i class="fas fa-heart text-pink-600 text-2xl mb-4"></i>
+                            <h4 class="font-bold text-dark mb-2">Resep Spesial</h4>
+                            <p class="text-dark opacity-90 text-sm">Menggunakan resep keluarga yang telah teruji selama puluhan tahun.</p>
+                        </div>
+                        <div class="bg-green-100 p-6 rounded-2xl">
+                            <i class="fas fa-seedling text-green-600 text-2xl mb-4"></i>
+                            <h4 class="font-bold text-dark mb-2">Bahan Pilihan</h4>
+                            <p class="text-dark opacity-90 text-sm">Hanya menggunakan bahan terbaik dari petani dan supplier terpercaya.</p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+<section id="products" class="section bg-secondary">
+    <div class="container mx-auto px-6 lg:px-16">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-bold text-dark">Koleksi <span class="text-primary">Kue Kami</span></h2>
+            <p class="mt-4 text-dark opacity-90 max-w-2xl mx-auto">
+                Temukan kue sempurna untuk setiap momen spesial dalam hidup Anda.
+            </p>
+            
+            <!-- Category Filter -->
+            <div class="flex justify-center mt-8 space-x-2">
+                <button class="category-filter px-4 py-2 rounded-full text-sm font-medium" data-category="all">
+                    Semua
+                </button>
+                <button class="category-filter px-4 py-2 rounded-full text-sm font-medium" data-category="hias">
+                    Kue Hias
+                </button>
+                <button class="category-filter px-4 py-2 rounded-full text-sm font-medium" data-category="basah">
+                    Kue Basah
+                </button>
+            </div>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Product 1 - Kue Hias -->
+            <div class="cake-card" data-category="hias">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/ulang_tahun.jpg" 
+                         alt="Black Forest V-1" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-primary text-white px-3 py-1 rounded-full text-xs font-bold">
+                        TERLARIS
+                    </div>
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Hias
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Black forest V-1</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Base cake black forest dengan toping coklat dan cery...</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 150.000</span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+            
+            <!-- Product 2 - Kue Hias -->
+            <div class="cake-card" data-category="hias">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_hias1.jpg" 
+                         alt="Black Forest V-2" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Hias
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Black forest V-2</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Base cake black forest dengan topping coklat batang serut beserta buah segar di atas nya.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 150.000</span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 3 - Kue Hias -->
+            <div class="cake-card" data-category="hias">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_hias2.jpg" 
+                         alt="Kue hias tema bola" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Hias
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Kue hias tema bola</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Base cake bolu Surabaya dengan butter cream dan hiasan bola.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 350.000</span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 4 - Kue Hias -->
+            <div class="cake-card" data-category="hias">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_hias3.jpg" 
+                         alt="Kue pengantin klasik V-1" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Hias
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Kue pengantin klasik V-1</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">dengan base cake bolu pandan coklat di beri topping butter cream dan hiasan bunga dari butter cream.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 150 .000</span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+            
+             <!-- Product 5 - Kue Hias -->
+             <div class="cake-card" data-category="hias">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_hias4.jpg" 
+                         alt="Bolu hias Frozen" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Hias
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Bolu hias Frozen</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Bolu hias dengan base cake bronis kukus di beri  hiasan butter cream dan topping Frozen yang menarik.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 250.000</span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+             <!-- Product 6 - Kue Hias -->
+             <div class="cake-card" data-category="hias">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_hias5.jpg" 
+                         alt="Kue sunat modern" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Hias
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Kue sunat modern</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Kue sunat berbahan dasar bronis kukus dengan topping butter cream dengan isian topping jajanan anak.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 300.000</span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+             <!-- Product 7 - Kue Hias -->
+             <div class="cake-card" data-category="hias">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_hias6.jpg" 
+                         alt="Kue hias Upin Ipin" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Hias
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Kue hias Upin Ipin</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Kue hias berbahan dasar bronis kukus dengan topping butter cream dan hiasan menarik.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 200.000</span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+             <!-- Product 8 - Kue Hias -->
+             <div class="cake-card" data-category="hias">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_hias7.jpg" 
+                        alt="Kue pengantin klasik V-2" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Hias
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Kue pengantin klasik V-2</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Base cake bronis kukus dengan hiasan bunga butter cream.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 500.000</span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+             <!-- Product 9 - Kue Hias -->
+             <div class="cake-card" data-category="hias">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_hias8.jpg" 
+                         alt="Kue hias helo Kitty" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Hias
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Kue hias helo Kitty</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Base cake bronis kukus
+                    Dengan hiasan menarik tema hello Kitty.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 250.000</span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+             <!-- Product 10 - Kue Hias -->
+             <div class="cake-card" data-category="hias">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_hias9.jpg" 
+                         alt="Shiny brownies topping glass cokelat" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Hias
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Shiny brownies topping glass cokelat</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Brownies panggang dengan glass coklat.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 125.000</span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+             <!-- Product 11 - Kue Hias -->
+             <div class="cake-card" data-category="hias">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_hias10.jpg" 
+                         alt="Fudgyy brownies topping" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 left-4 bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Hias
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Fudgyy brownies topping</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Brownies panggang dengan  berbagai macam topping.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 125.000</span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 12 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah.jpg" 
+                        alt="Mochi kacang" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Mochi kacang</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Bahan dasar tepung ketan dan santan yang gurih di beri isian kacang cacah yang manis.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 2.500<a class="text-gray-400 text-sm"> / satuannya</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 13 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah1.jpg" 
+                         alt="Putu ayu jumbo" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Putu ayu jumbo</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Bolu berbahan dasar tepung, telor dan santan dipadukan dengan toping kelapa muda....</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 35.000</span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 14 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah2.jpg" 
+                         alt="Onde isi kacang ijo" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Onde isi kacang ijo</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Bahan dasar kulit dari tepung Ketan  di tambah dengan isian kacang ijo kupas..</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 2.000 <a class="text-gray-400 text-sm"> / satuannya</a></a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 15 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah3.jpg" 
+                        alt="Kue sus dan Putu ayu"
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Kue sus dan Putu ayu</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Kulit kopong bahan dasar telor dengan isian susu yg creamy dan Bolu dengan topping kelapa muda yang gurih.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 2.500 <a class="text-gray-400 text-sm"> / satuannya</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+           <!-- Product 16 - Kue Basah -->
+<div class="cake-card" data-category="basah">
+    <div class="relative overflow-hidden h-64">
+        <img src="produk/kue_basah4.jpg" 
+             alt="Bolen pisang lilit" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+        <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+            BARU
+        </div>
+        <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+            Kue Basah
+        </div>
+    </div>
+    <div class="p-6">
+        <h3 class="text-xl font-bold text-dark mb-2">Bolen pisang lilit</h3>
+        <p class="text-dark opacity-90 text-sm mb-4">Kulit pastry dengan isian pisang utuh, selai coklat dan keju di beri topping berlimpah.</p>
+        <div class="flex justify-between items-center">
+            <span class="text-primary font-bold text-lg">Rp 6.000 <span class="text-gray-400 text-sm"> / satuannya</span></span>
+            <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                <i class="fas fa-shopping-cart mr-2"></i> Pesan
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 17 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah5.jpg" 
+                         alt="Pie buah" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Pie buah</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Bahan kulit renyah di padukan dengan cream yang creamy berbahan dasar susu yang gurih dengan topping buah buahan segar.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 2.500 <a class="text-gray-400 text-sm"> / satuannya</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 18 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah6.jpg" 
+                         alt="Zupa soup" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Zupa soup</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Bahan dasar kulit pastry dengan isian Soup ayam...</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 10.000 <a class="text-gray-400 text-sm"> / satuannya</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 19 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah7.jpg" 
+                         alt="Putu ayu gula aren" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Putu ayu gula aren</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Bahan dasar bolu gula aren di padu padan kan dengan topping kelapa parut muda.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 2.500 <a class="text-gray-400 text-sm"> / satuannya</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 20 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah8.jpg" 
+                         alt="Risol sayur" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Risol sayur</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Berbahan dasar terigu dan isian sayur yang segar.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 2.000 <a class="text-gray-400 text-sm"> / satuannya</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 21 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah9.jpg" 
+                         alt="Bolu kukus mekar" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Bolu kukus mekar</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Bolu mekar cup berbahan dasar tepung dan santan.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 2.000 <a class="text-gray-400 text-sm"> / satuannya</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 22 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah10.jpg" 
+                         alt="Dimsum ayam" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Dimsum ayam</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Isian daging ayam full dengan sayuran segar ditambah dengan cocolan saus sambal .</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 25.000 <a class="text-gray-400 text-sm"> / 10 pcs</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 23 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah11.jpg" 
+                         alt="Bolu kukus gula aren" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Bolu kukus gula aren</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Bahan berkualitas dengan menggunakan gula aren asli.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 2.000 <a class="text-gray-400 text-sm"> / satuannya</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 24 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah12.jpg" 
+                         alt="Pastel isi sayur" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Pastel isi sayur</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Kulit pastel yang renyah dengan isian sayuran.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 2.000 <a class="text-gray-400 text-sm"> / satuannya</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 25 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah13.jpg" 
+                         alt="Bolen coklat keju" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Bolen coklat keju</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Kulit pastry dengan isian pisang keju dan coklat.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 20.000 <a class="text-gray-400 text-sm"> / 5 pcs</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 26 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah14.jpg" 
+                         alt="Pie susu" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Pie susu</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Bahan cream susu uht dan kental manis di padukan dengan bahan kulit yang renyah.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 2.000 <a class="text-gray-400 text-sm"> / satuannya</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 27 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah15.jpg" 
+                         alt="Bronis lumer" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Bronis lumer</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Perpaduan bronis dan glass coklat yang pas membuat bronis lumer ini sangat creamy dan nyoklat banget ditambah dengan berbagai topping.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 7.000 <a class="text-gray-400 text-sm"> / cup</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 28 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah16.jpg" 
+                         alt="Bolu Gulung Klasik" 
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Bolu Gulung Klasik</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Bolu gulung yang lembut dengan varian isi.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 30.000 <a class="text-gray-400 text-sm"> / satuannya</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+
+            <!-- Product 29 - Kue Basah -->
+            <div class="cake-card" data-category="basah">
+                <div class="relative overflow-hidden h-64">
+                    <img src="produk/kue_basah17.jpg" 
+                         alt="Donat kentang"
+             class="w-full h-full object-cover transition duration-500 hover:scale-110 cursor-pointer"
+             onclick="openFullImage(this)">
+                    <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        BARU
+                    </div>
+                    <div class="absolute top-4 left-4 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                        Kue Basah
+                    </div>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-xl font-bold text-dark mb-2">Donat kentang</h3>
+                    <p class="text-dark opacity-90 text-sm mb-4">Donat berbahan dasar kentang yang di padukan dengan berbagai topping.</p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-primary font-bold text-lg">Rp 3.000 <a class="text-gray-400 text-sm"> / satuannya</a></span>
+                        <button class="btn-primary px-4 py-2 rounded-full text-sm font-medium shadow-md">
+                            <i class="fas fa-shopping-cart mr-2"></i> Pesan
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Full Image Modal -->
+<div id="fullImageModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-90 flex items-center justify-center p-4">
+    <div class="relative w-full h-full flex items-center justify-center">
+        <button onclick="closeFullImage()" class="absolute top-4 right-4 text-white text-3xl hover:text-gray-300 focus:outline-none z-10">
+            &times;
+        </button>
+        <div class="relative max-w-3xl w-full h-full flex items-center justify-center">
+            <img id="fullImage" src="" alt="" class="w-auto h-auto max-w-[90vw] max-h-[90vh] object-contain">
+        </div>
+        <div class="absolute bottom-4 left-0 right-0 text-white text-center text-sm px-4" id="imageCaption"></div>
+    </div>
+</div>
+            
+        </div>
+    </div>
+</section>
+
+    <!-- Testimonials Section -->
+    <section class="section bg-white">
+        <div class="container mx-auto px-6 lg:px-16">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark">Testimoni <span class="text-primary">Pelanggan</span></h2>
+                <p class="mt-4 text-dark opacity-90 max-w-2xl mx-auto">
+                    Apa kata mereka yang telah mencicipi kelezatan kue dari Tin's Cake.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card p-8">
+                    <div class="flex items-center mb-4">
+                       <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-600">
+                        <span class="text-lg font-medium">👤</span>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-dark">Sarah Wijaya</h4>
+                            <div class="flex mt-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-dark opacity-90">
+                        "Kue ulang tahun dari Tin's Cake membuat pesta anak saya sangat spesial! Rasanya enak dan tidak terlalu manis, persis seperti yang saya inginkan."
+                    </p>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card p-8">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-600">
+                        <span class="text-lg font-medium">👤</span>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-dark">Budi Santoso</h4>
+                            <div class="flex mt-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-dark opacity-90">
+                        "Kue cokelatnya benar-benar premium! Teksturnya lembut dan rasanya sangat kaya. Sekarang selalu pesan dari Tin's Cake untuk acara kantor."
+                    </p>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card p-8">
+                    <div class="flex items-center mb-4">
+                       <div class="w-12 h-12 rounded-full bg-gray-300 flex items-center justify-center text-gray-600">
+                        <span class="text-lg font-medium">👤</span>
+                        </div>
+                        <div class="ml-4">
+                            <h4 class="font-bold text-dark">Dewi Lestari</h4>
+                            <div class="flex mt-1">
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                                <i class="fas fa-star text-yellow-400"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-dark opacity-90">
+                        "Kue pernikahan kami dari Tin's Cake sempurna! Tidak hanya cantik tapi juga rasanya luar biasa. Banyak tamu yang memuji dan bertanya di mana kami memesannya."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="section bg-secondary">
+        <div class="container mx-auto px-6 lg:px-16">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-dark">Kunjungi <span class="text-primary">Toko Kami</span></h2>
+                <p class="mt-4 text-dark opacity-90 max-w-2xl mx-auto">
+                    Datang langsung ke toko kami untuk pengalaman membeli kue yang lebih personal.
+                </p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row">
+                <div class="lg:w-1/2 mb-8 lg:mb-0 lg:pr-8">
+                    <div class="map-container h-96 bg-gray-200">
+                        <!-- Google Maps Embed -->
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d203.89105474393716!2d106.81017267206727!3d-6.488531318040528!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sid!2sid!4v1746677164703!5m2!1sid!2sid" 
+                                width="100%" 
+                                height="100%" 
+                                style="border:0;" 
+                                allowfullscreen="" 
+                                loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="lg:w-1/2 lg:pl-8">
+                    <div class="bg-white p-8 rounded-2xl shadow-lg h-full">
+                        <h3 class="text-2xl font-bold text-dark mb-6">Informasi Toko</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex">
+                                <div class="bg-primary-light p-3 rounded-full h-12 w-12 flex items-center justify-center">
+                                    <i class="fas fa-map-marker-alt text-primary"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-dark">Alamat</h4>
+                                    <p class="text-dark opacity-90">Perumahan Puspa Raya, Jalan Perumahan Puspa Raya, RT.3/RW.12, Bojong Baru, Bojonggede
+                                    BOJONGGEDE, KAB. BOGOR, JAWA BARAT, ID, 16920</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex">
+                                <div class="bg-primary-light p-3 rounded-full h-12 w-12 flex items-center justify-center">
+                                    <i class="fas fa-clock text-primary"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-dark">Jam Buka</h4>
+                                    <p class="text-dark opacity-90">
+                                        Senin - Jumat: 09.00 - 20.00<br>
+                                        Sabtu - Minggu: 08.00 - 21.00
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex">
+                                <div class="bg-primary-light p-3 rounded-full h-12 w-12 flex items-center justify-center">
+                                    <i class="fas fa-phone-alt text-primary"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="font-bold text-dark">Kontak</h4>
+                                    <p class="text-dark opacity-90">
+                                        Telepon: (62) 877-2757-5525<br>
+                                        WhatsApp: 0877-2757-5525<br>
+                                        Email: sugihtitin02gmail.com 
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="font-bold text-dark mb-4">Ikuti Kami</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://www.instagram.com/sugihartini_t?igsh=eWRyMXJkYjg1MDAz" class="bg-primary-light hover:bg-primary hover:text-white text-primary w-10 h-10 rounded-full flex items-center justify-center transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://www.facebook.com/share/19LVHDibJG/" class="bg-primary-light hover:bg-primary hover:text-white text-primary w-10 h-10 rounded-full flex items-center justify-center transition">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://wa.me/6287727575525" class="bg-primary-light hover:bg-primary hover:text-white text-primary w-10 h-10 rounded-full flex items-center justify-center transition">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6 lg:px-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div>
+                <a href="#home" class="flex items-center">
+        <img src="logo/Logo.png" alt="Logo" class="w-9 h-9 rounded-full border-2 border-white">
+            <span class="ml-3 text-xl font-semibold text-white">Tin's Cake</span>
+        </a><br>
+                    <p class="text-gray-400">
+                        Menyajikan kue premium dengan cita rasa autentik dan bahan-bahan pilihan sejak 2018.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-primary-light">Tautan Cepat</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-primary-light transition">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-primary-light transition">About Us</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-primary-light transition">Produk</a></li>
+                        <li><a href="#location" class="text-gray-400 hover:text-primary-light transition">Lokasi</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-primary-light">Produk</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#products" class="text-gray-400 hover:text-primary-light transition">Kue Hias</a></li>
+                        <li><a href="#products" class="text-gray-400 hover:text-primary-light transition">Kue Basah</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-6 text-primary-light">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">
+                        Dapatkan promo spesial dan menu terbaru dengan berlangganan newsletter kami.
+                        
+                    </p>
+                    <form class="flex">
+                        <input type="email" placeholder="Email Anda" class="bg-gray-700 text-white px-4 py-2 rounded-l focus:outline-none focus:ring-2 focus:ring-primary w-full">
+                        <button type="submit" class="bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-r transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                    <h1>Coming Soon!</h1> 
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">
+                    &copy; 2025 Tin's Cake. All rights reserved.
+                </p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-primary-light transition">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-primary-light transition">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#home" class="fixed bottom-6 right-6 bg-primary hover:bg-primary-dark text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition opacity-0 invisible" id="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+    
+    
+
+    <script>
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            const backToTop = document.getElementById('back-to-top');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+                backToTop.classList.remove('opacity-0', 'invisible');
+                backToTop.classList.add('opacity-100', 'visible');
+            } else {
+                navbar.classList.remove('scrolled');
+                backToTop.classList.remove('opacity-100', 'visible');
+                backToTop.classList.add('opacity-0', 'invisible');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Cart functionality
+        document.addEventListener('DOMContentLoaded', function() {
+    const cart = {
+        items: [],
+        total: 0,
+
+        clearCart: function() {
+            this.items = [];
+            this.updateCart();
+        },
+        
+        addItem: function(product) {
+            const existingItem = this.items.find(item => item.id === product.id);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                this.items.push({
+                    ...product,
+                    quantity: 1
+                });
+            }
+            this.updateCart();
+            this.showAddToCartAnimation();
+        },
+        
+        removeItem: function(productId) {
+            this.items = this.items.filter(item => item.id !== productId);
+            this.updateCart();
+        },
+        
+        updateQuantity: function(productId, newQuantity) {
+            const item = this.items.find(item => item.id === productId);
+            if (item) {
+                item.quantity = newQuantity;
+                if (item.quantity <= 0) {
+                    this.removeItem(productId);
+                } else {
+                    this.updateCart();
+                }
+            }
+        },
+        
+        calculateTotal: function() {
+            this.total = this.items.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            return this.total;
+        },
+        
+        updateCart: function() {
+            // Update counter
+            const totalItems = this.items.reduce((sum, item) => sum + item.quantity, 0);
+            const counter = document.getElementById('cart-counter');
+            if (counter) {
+                counter.textContent = totalItems;
+                totalItems > 0 ? counter.classList.remove('hidden') : counter.classList.add('hidden');
+            }
+            
+            // Update cart modal
+            this.updateCartModal();
+        },
+        
+        updateCartModal: function() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            
+            if (!cartItemsContainer || !cartTotal) return;
+            
+            if (this.items.length === 0) {
+                cartItemsContainer.innerHTML = `
+                    <div class="text-center py-8 text-gray-500">
+                        Keranjang belanja kosong
+                    </div>
+                `;
+                cartTotal.textContent = 'Rp 0';
+                return;
+            }
+            
+            cartItemsContainer.innerHTML = this.items.map(item => `
+                <div class="flex items-center justify-between border-b pb-4" data-id="${item.id}">
+                    <div class="flex items-center space-x-4">
+                        <img src="${item.image}" alt="${item.name}" class="w-16 h-16 object-cover rounded">
+                        <div>
+                            <h4 class="font-medium">${item.name}</h4>
+                            <p class="text-sm text-gray-500">${this.formatPrice(item.price)}</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <button class="quantity-btn decrease px-2 py-1 bg-gray-100 rounded" data-id="${item.id}">
+                            <i class="fas fa-minus text-xs"></i>
+                        </button>
+                        <span class="quantity">${item.quantity}</span>
+                        <button class="quantity-btn increase px-2 py-1 bg-gray-100 rounded" data-id="${item.id}">
+                            <i class="fas fa-plus text-xs"></i>
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+            
+            cartTotal.textContent = this.formatPrice(this.calculateTotal());
+        },
+        
+        formatPrice: function(price) {
+            return 'Rp ' + price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        },
+        
+        showAddToCartAnimation: function() {
+            const cartIcon = document.querySelector('#cart-button i');
+            if (cartIcon) {
+                cartIcon.classList.add('animate-bounce');
+                setTimeout(() => {
+                    cartIcon.classList.remove('animate-bounce');
+                }, 1000);
+            }
+        },
+        
+        showCheckoutModal: function() {
+            const modal = document.getElementById('checkout-modal');
+            const modalContent = modal.querySelector('div > div');
+            
+            // Build order summary
+            const orderSummary = document.getElementById('order-summary');
+            let summaryHTML = '<h4 class="font-medium text-gray-800 mb-3">Detail Pesanan:</h4>';
+            let total = 0;
+            
+            this.items.forEach(item => {
+                const itemTotal = item.price * item.quantity;
+                total += itemTotal;
+                summaryHTML += `
+                    <div class="flex justify-between mb-2 text-sm">
+                        <span>${item.name} (${item.quantity}x)</span>
+                        <span>${this.formatPrice(itemTotal)}</span>
+                    </div>
+                `;
+            });
+            
+            summaryHTML += `
+                <div class="border-t mt-3 pt-2 font-medium">
+                    <div class="flex justify-between">
+                        <span>Total:</span>
+                        <span>${this.formatPrice(total)}</span>
+                    </div>
+                </div>
+            `;
+            
+            orderSummary.innerHTML = summaryHTML;
+            
+            // Show modal with animation
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                modalContent.classList.remove('scale-95', 'opacity-0');
+                modalContent.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+    };
+
+    // Product data
+    const products = {
+        'Black forest V-1': {
+            id: 1,
+            name: 'Black forest V-1',
+            price: 150000,
+            image: 'produk/ulang_tahun.jpg',
+            category: 'hias'
+        },
+        'Black forest V-2': {
+            id: 2,
+            name: 'Black forest V-2',
+            price: 150000,
+            image: 'produk/kue_hias1.jpg',
+            category: 'hias'
+        },
+        'Kue hias tema bola': {
+            id: 3,
+            name: 'Kue hias tema bola',
+            price: 350000,
+            image: 'produk/kue_hias2.jpg',
+            category: 'hias'
+        },
+        'Kue pengantin klasik V-1': {
+            id: 4,
+            name: 'Kue pengantin klasik V-1',
+            price: 150000,
+            image: 'produk/kue_hias3.jpg',
+            category: 'hias'
+        },
+        'Bolu hias Frozen': {
+            id: 5,
+            name: 'Bolu hias Frozen',
+            price: 250000,
+            image: 'produk/kue_hias4.jpg',
+            category: 'hias'
+        },
+        'Kue sunat modern': {
+            id: 6,
+            name: 'Kue sunat modern',
+            price: 300000,
+            image: 'produk/kue_hias5.jpg',
+            category: 'hias'
+        },
+        'Kue hias Upin Ipin': {
+            id: 7,
+            name: 'Kue hias Upin Ipin',
+            price: 200000,
+            image: 'produk/kue_hias6.jpg',
+            category: 'hias'
+        },
+        'Kue pengantin klasik V-2': {
+            id: 8,
+            name: 'Kue pengantin klasik V-2',
+            price: 500000,
+            image: 'produk/kue_hias7.jpg',
+            category: 'hias'
+        },
+        'Kue hias helo Kitty': {
+            id: 9,
+            name: 'Kue hias helo Kitty',
+            price: 250000,
+            image: 'produk/kue_hias8.jpg',
+            category: 'hias'
+        },
+        'Shiny brownies topping glass cokelat': {
+            id: 10,
+            name: 'Shiny brownies topping glass cokelat',
+            price: 125000,
+            image: 'produk/kue_hias9.jpg',
+            category: 'hias'
+        },
+        'Fudgyy brownies topping': {
+            id: 11,
+            name: 'Fudgyy brownies topping',
+            price: 125000,
+            image: 'produk/kue_hias10.jpg',
+            category: 'hias'
+        },
+        
+        'Mochi kacang': {
+            id: 12,
+            name: 'Mochi kacang',
+            price: 2500,
+            image: 'produk/kue_basah.jpg',
+            category: 'basah'
+        },
+        'Putu ayu jumbo': {
+            id: 13,
+            name: 'Putu ayu jumbo',
+            price: 35000,
+            image: 'produk/kue_basah1.jpg',
+            category: 'basah'
+        },
+        'Onde isi kacang ijo': {
+            id: 14,
+            name: 'Onde isi kacang ijo',
+            price: 2000,
+            image: 'produk/kue_basah2.jpg',
+            category: 'basah'
+        },
+        'Kue sus dan Putu ayu': {
+            id: 15,
+            name: 'Kue sus dan Putu ayu',
+            price: 2500,
+            image: 'produk/kue_basah3.jpg',
+            category: 'basah'
+        },
+        'Bolen pisang lilit': {
+            id: 16,
+            name: 'Bolen pisang lilit',
+            price: 6000,
+            image: 'produk/kue_basah4.jpg',
+            category: 'basah'
+        },
+        'Pie buah': {
+            id: 17,
+            name: 'Pie buah',
+            price: 2500,
+            image: 'produk/kue_basah5.jpg',
+            category: 'basah'
+        },
+        'Zupa soup': {
+            id: 18,
+            name: 'Zupa soup',
+            price: 10000,
+            image: 'produk/kue_basah6.jpg',
+            category: 'basah'
+        },
+        'Putu ayu gula aren': {
+            id: 19,
+            name: 'Putu ayu gula aren',
+            price: 2500,
+            image: 'produk/kue_basah7.jpg',
+            category: 'basah'
+        },
+        'Risol sayur': {
+            id: 20,
+            name: 'Risol sayur',
+            price: 2000,
+            image: 'produk/kue_basah8.jpg',
+            category: 'basah'
+        },
+        'Bolu kukus mekar': {
+            id: 21,
+            name: 'Bolu kukus mekar',
+            price: 2000,
+            image: 'produk/kue_basah9.jpg',
+            category: 'basah'
+        },
+        'Dimsum ayam': {
+            id: 22,
+            name: 'Dimsum ayam',
+            price: 25000,
+            image: 'produk/kue_basah10.jpg',
+            category: 'basah'
+        },
+        'Bolu kukus gula aren': {
+            id: 23,
+            name: 'Bolu kukus gula aren',
+            price: 2000,
+            image: 'produk/kue_basah11.jpg',
+            category: 'basah'
+        },
+        'Pastel isi sayur': {
+            id: 24,
+            name: 'Pastel isi sayur',
+            price: 2000,
+            image: 'produk/kue_basah12.jpg',
+            category: 'basah'
+        },
+        'Bolen coklat keju': {
+            id: 25,
+            name: 'Bolen coklat keju',
+            price: 20000,
+            image: 'produk/kue_basah13.jpg',
+            category: 'basah'
+        },
+        'Pie susu': {
+            id: 26,
+            name: 'Pie susu',
+            price: 2000,
+            image: 'produk/kue_basah14.jpg',
+            category: 'basah'
+        },
+        'Bronis lumer': {
+            id: 27,
+            name: 'Bronis lumer',
+            price: 7000,
+            image: 'produk/kue_basah15.jpg',
+            category: 'basah'
+        },
+        'Bolu Gulung Klasik': {
+            id: 28,
+            name: 'Bolu Gulung Klasik',
+            price: 30000,
+            image: 'produk/kue_basah16.jpg',
+            category: 'basah'
+        },
+        'Donat kentang': {
+            id: 29,
+            name: 'Donat kentang',
+            price: 3000,
+            image: 'produk/kue_basah17.jpg',
+            category: 'basah'
+        }
+    };
+
+    // Modal Functions
+    function showConfirmationModal() {
+        const modal = document.getElementById('confirmation-modal');
+        const modalContent = modal.querySelector('div > div');
+        
+        modal.classList.remove('hidden');
+        
+        setTimeout(() => {
+            modalContent.classList.remove('scale-95', 'opacity-0');
+            modalContent.classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+
+    function hideConfirmationModal() {
+        const modal = document.getElementById('confirmation-modal');
+        const modalContent = modal.querySelector('div > div');
+        
+        modalContent.classList.remove('scale-100', 'opacity-100');
+        modalContent.classList.add('scale-95', 'opacity-0');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
+
+    function hideCheckoutModal() {
+        const modal = document.getElementById('checkout-modal');
+        const modalContent = modal.querySelector('div > div');
+        
+        modalContent.classList.remove('scale-100', 'opacity-100');
+        modalContent.classList.add('scale-95', 'opacity-0');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+    }
+
+    // Event Listeners
+    document.querySelectorAll('.cake-card button').forEach(button => {
+        button.addEventListener('click', function() {
+            const productName = this.closest('.cake-card').querySelector('h3').textContent;
+            const product = products[productName];
+            cart.addItem(product);
+        });
+    });
+
+    // Cart button
+    const cartButton = document.getElementById('cart-button');
+    if (cartButton) {
+        cartButton.addEventListener('click', function() {
+            document.getElementById('cart-modal').classList.remove('hidden');
+        });
+    }
+
+    // Close cart modal
+    const closeCart = document.getElementById('close-cart');
+    if (closeCart) {
+        closeCart.addEventListener('click', function() {
+            document.getElementById('cart-modal').classList.add('hidden');
+        });
+    }
+
+    // Click outside cart modal to close
+    const cartModal = document.getElementById('cart-modal');
+    if (cartModal) {
+        cartModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                this.classList.add('hidden');
+            }
+        });
+    }
+
+    // Quantity buttons in cart
+    const cartItems = document.getElementById('cart-items');
+    if (cartItems) {
+        cartItems.addEventListener('click', function(e) {
+            const btn = e.target.closest('.quantity-btn');
+            if (!btn) return;
+            
+            const id = parseInt(btn.dataset.id);
+            const item = cart.items.find(item => item.id === id);
+            
+            if (!item) return;
+            
+            if (btn.classList.contains('increase')) {
+                item.quantity += 1;
+            } else if (btn.classList.contains('decrease')) {
+                item.quantity -= 1;
+                if (item.quantity <= 0) {
+                    cart.items = cart.items.filter(i => i.id !== id);
+                }
+            }
+            
+            cart.updateCart();
+        });
+    }
+
+    // Clear cart button
+    const clearCartBtn = document.getElementById('clear-cart');
+    if (clearCartBtn) {
+        clearCartBtn.addEventListener('click', showConfirmationModal);
+    }
+
+    // Confirmation modal buttons
+    const confirmCancel = document.getElementById('confirm-cancel');
+    if (confirmCancel) {
+        confirmCancel.addEventListener('click', hideConfirmationModal);
+    }
+
+    const confirmDelete = document.getElementById('confirm-delete');
+    if (confirmDelete) {
+        confirmDelete.addEventListener('click', function() {
+            cart.clearCart();
+            hideConfirmationModal();
+            
+            // Show success notification
+            const successAlert = document.createElement('div');
+            successAlert.className = 'fixed bottom-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-10 opacity-0 transition-all duration-300';
+            successAlert.innerHTML = `
+                <div class="flex items-center">
+                    <i class="fas fa-check-circle mr-2"></i>
+                    <span>Semua pesanan telah dihapus</span>
+                </div>
+            `;
+            document.body.appendChild(successAlert);
+            
+            setTimeout(() => {
+                successAlert.classList.remove('translate-y-10', 'opacity-0');
+                successAlert.classList.add('translate-y-0', 'opacity-100');
+            }, 10);
+            
+            setTimeout(() => {
+                successAlert.classList.remove('translate-y-0', 'opacity-100');
+                successAlert.classList.add('translate-y-10', 'opacity-0');
+                setTimeout(() => successAlert.remove(), 300);
+            }, 3000);
+        });
+    }
+
+    // Checkout button
+    const checkoutBtn = document.getElementById('checkout-btn');
+    if (checkoutBtn) {
+        checkoutBtn.addEventListener('click', function() {
+            if (cart.items.length > 0) {
+                cart.showCheckoutModal();
+            }
+        });
+    }
+
+    // WhatsApp confirmation button
+    const confirmWhatsapp = document.getElementById('confirm-whatsapp');
+    if (confirmWhatsapp) {
+        confirmWhatsapp.addEventListener('click', function() {
+            const whatsappBtn = this;
+            const loadingIcon = document.getElementById('whatsapp-loading');
+            
+            // Show loading
+            whatsappBtn.disabled = true;
+            loadingIcon.classList.remove('hidden');
+            
+            // Prepare WhatsApp message
+            const phoneNumber = '6287727575525'; // Replace with your WhatsApp number
+            let message = 'Halo Tin\'s Cake, saya ingin memesan:\n\n';
+            
+            cart.items.forEach(item => {
+                message += `- ${item.name} (${item.quantity}x) : ${cart.formatPrice(item.price * item.quantity)}\n`;
+            });
+            
+            message += `\n*Total Pesanan*: ${cart.formatPrice(cart.calculateTotal())}\n\n`;
+            message += 'Mohon konfirmasi ketersediaan dan total pembayaran. Terima kasih!';
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Simulate loading before redirecting
+            setTimeout(() => {
+                window.location.href = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            }, 1500);
+        });
+    }
+
+    // Cancel order button
+    const cancelOrder = document.getElementById('cancel-order');
+    if (cancelOrder) {
+        cancelOrder.addEventListener('click', hideCheckoutModal);
+    }
+
+    // Category Filter Functionality
+    document.querySelectorAll('.category-filter').forEach(filter => {
+        filter.addEventListener('click', function() {
+            // Update active filter
+            document.querySelectorAll('.category-filter').forEach(f => {
+                f.classList.remove('active', 'bg-primary', 'text-white');
+                f.classList.add('text-dark');
+            });
+            this.classList.add('active', 'bg-primary', 'text-white');
+            this.classList.remove('text-dark');
+            
+            // Filter cakes
+            const category = this.dataset.category;
+            document.querySelectorAll('.cake-card').forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+    
+    // Set 'all' as default active filter
+    const defaultFilter = document.querySelector('.category-filter[data-category="all"]');
+    if (defaultFilter) {
+        defaultFilter.classList.add('active', 'bg-primary', 'text-white');
+        defaultFilter.classList.remove('text-dark');
+    }
+});
+// Mobile Menu Toggle
+const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const closeMobileMenu = document.getElementById('close-mobile-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const overlay = document.getElementById('mobile-menu-overlay');
+    
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    });
+    
+    closeMobileMenu.addEventListener('click', () => {
+        mobileMenu.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+    });
+    
+    overlay.addEventListener('click', () => {
+        mobileMenu.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+        document.body.style.overflow = '';
+    });
+    function openFullImage(imgElement) {
+        const modal = document.getElementById('fullImageModal');
+        const fullImage = document.getElementById('fullImage');
+        const caption = document.getElementById('imageCaption');
+        
+        fullImage.src = imgElement.src;
+        fullImage.alt = imgElement.alt;
+        caption.textContent = imgElement.alt;
+        
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeFullImage() {
+        const modal = document.getElementById('fullImageModal');
+        modal.classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+    
+    document.getElementById('fullImageModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeFullImage();
+        }
+    });
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeFullImage();
+        }
+    });
+    </script>
+    
+    
+</body>
+</html>
